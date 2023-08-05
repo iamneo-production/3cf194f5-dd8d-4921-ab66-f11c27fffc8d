@@ -1,9 +1,11 @@
 package com.virtusa.pharmacyservice.entity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Medication {
 
+	@Id
     int id;
 	 String name;
 	 String description;
