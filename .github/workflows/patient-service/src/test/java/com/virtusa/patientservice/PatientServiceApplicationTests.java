@@ -1,4 +1,4 @@
-package com.virtusa.patientservice.patientservice;
+package com.virtusa.patientservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
