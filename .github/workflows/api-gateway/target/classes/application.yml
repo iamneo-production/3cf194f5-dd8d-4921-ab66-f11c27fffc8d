@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        ## service1
+        - id: patient-service
+          uri: lb://PATIENT-SERVICE
+          predicates:
+            - Path=/patients/**
+          filters:
+            - StripPrefix=1
+
+        ## Service2
+        - id: doctor-service
+          uri: lb://DOCTOR-SERVICE
+          predicates:
+            - Path=/doctor/**
+          filters:
+            - StripPrefix=1
+        ## Service3
+        - id: pharmacy-service
+          uri: lb://PHARMACY-SERVICE
+          predicates:
+            - Path=/pharmacy/**
+          filters:
+            - StripPrefix=1
+        ## Service4
+        - id: reminder-service
+          uri: lb://REMINDER-SERVICE
+          predicates:
+            - Path=/reminders/**
+          filters:
+            - StripPrefix=1
+        ## Service5
+        - id: notification-service
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/notifications/**
+          filters:
+            - StripPrefix=1
+server:
+  port: 8765
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
