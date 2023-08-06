@@ -39,5 +39,10 @@ public class DoctorServiceController {
         }
         return schedules;
     }
+
+    @GetMapping("prescriptions/{patientId}")
+    public List<Prescription> gettingPrescriptions(@PathVariable("patientId") int pid){
+        return prescriptionRepository.findByPatientId(pid);
+    }
     
 }
