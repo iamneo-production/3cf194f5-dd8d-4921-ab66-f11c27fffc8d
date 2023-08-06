@@ -10,6 +10,6 @@ import com.virtusa.patientservice.entity.Prescription;
 @FeignClient(name = "DOCTOR-SERVICE")
 public interface DoctorFeignClient {
 
-    @GetMapping("prescriptions/{patientId}")
+    @GetMapping("doctor/prescriptions/{patientId}")
     public List<Prescription> gettingPrescriptions(@PathVariable("patientId") int pid);
 }

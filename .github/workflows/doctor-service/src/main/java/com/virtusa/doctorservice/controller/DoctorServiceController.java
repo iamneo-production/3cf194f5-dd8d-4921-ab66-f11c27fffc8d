@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.virtusa.doctorservice.entity.Prescription;
 import com.virtusa.doctorservice.entity.MedSchedule;
 import com.virtusa.doctorservice.repository.PrescriptionRepository;
-
+import io.github.resilience4j.retry.annotation.Retry;
 
 @RestController
 public class DoctorServiceController {
@@ -23,12 +23,12 @@ public class DoctorServiceController {
     @Autowired
     PrescriptionRepository prescriptionRepository;
 
-    @PostMapping("/prescriptions")
+    @PostMapping("doctor/prescriptions")
     public void addedPrescription(@RequestBody Prescription p){
         prescriptionRepository.save(p);
     }
 
-    @GetMapping("/scheduleDate/{patientId}")
+    @GetMapping("doctor/scheduleDate/{patientId}")
     public List<MedSchedule> gettingSchedule(@PathVariable("patientId") int pid){
         List<MedSchedule> schedules=new ArrayList<>();
         for(Prescription p:prescriptionRepository.findByPatientId(pid)){
@@ -39,10 +39,18 @@ public class DoctorServiceController {
         }
         return schedules;
     }
-
-    @GetMapping("prescriptions/{patientId}")
+    @Retry(name="prescription", fallbackMethod="prescriptionFallback")
+    @GetMapping("doctor/prescriptions/{patientId}")
     public List<Prescription> gettingPrescriptions(@PathVariable("patientId") int pid){
         return prescriptionRepository.findByPatientId(pid);
     }
+
+    public List<Prescription> prescriptionFallback(){
+        List<Prescription> pres=new ArrayList<Prescription>();
+        Prescription p=new Prescription(0,0,0,"Doctor Service is down","FallbackMethod called");
+        pres.add(p);
+        return pres;
+    }
+
     
 }

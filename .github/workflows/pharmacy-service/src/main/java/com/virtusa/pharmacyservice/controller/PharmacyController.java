@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.virtusa.pharmacyservice.entity.Medication;
 import com.virtusa.pharmacyservice.repository.MedicationRepository;
+import io.github.resilience4j.retry.annotation.Retry;
 
 @RestController
 public class PharmacyController {
@@ -18,15 +19,20 @@ public class PharmacyController {
     @Autowired
     MedicationRepository medicationRepository;
 
-    @GetMapping("/medications/{medication_id}")
+    @GetMapping("pharmacy/medications/{medication_id}")
+    @Retry(name="medication",fallbackMethod="medicationFallback")
     public Medication getMedication(@PathVariable("medication_id") int id){
         return medicationRepository.findById(id).get();
     }
 
-    @PostMapping("/medications")
+    @PostMapping("pharmacy/medications")
     public void addMedication(@RequestBody Medication m){
          medicationRepository.save(m);
     }
 
+    public Medication medicationFallback(){
+        Medication m=new Medication(0,"Pharmacy Service is down","Fallback method called","");
+        return m;
+    }
     
 }

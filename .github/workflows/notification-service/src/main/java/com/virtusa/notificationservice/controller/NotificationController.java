@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.virtusa.notificationservice.dto.MedSchedule;
 import com.virtusa.notificationservice.dto.Notification;
 import com.virtusa.notificationservice.repository.NotificationRepository;
-
+import io.github.resilience4j.retry.annotation.Retry;
 import com.virtusa.notificationservice.feign.ReminderFeignClient;
 
 @RestController
@@ -55,12 +55,15 @@ public class NotificationController {
         }
     }
 
+    @Retry(name="notification",fallbackMethod="notificationFallback")
     @GetMapping("/notifications/{patientId}")
     public List<Notification> notifications(@PathVariable("patientId") int pid){
         return notificationRepository.findByPatientId(pid);
     }
 
-
-
+    public List<Notification> notificationFallback(){
+        List<Notification> notifys=new ArrayList<Notification>();
+        Notification n=new Notification(0,"Notification service is down",0,"Fallbackmethod called");
+    }
 
 }
