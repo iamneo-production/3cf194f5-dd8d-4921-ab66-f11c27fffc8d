@@ -1,6 +1,0 @@
-com/virtusa/notificationservice/NotificationServiceApplication.class
-com/virtusa/notificationservice/repository/NotificationRepository.class
-com/virtusa/notificationservice/dto/MedSchedule.class
-com/virtusa/notificationservice/controller/NotificationController.class
-com/virtusa/notificationservice/dto/Notification.class
-com/virtusa/notificationservice/feign/ReminderFeignClient.class

@@ -1,5 +1,0 @@
-com/virtusa/doctorservice/entity/Prescription.class
-com/virtusa/doctorservice/controller/DoctorServiceController.class
-com/virtusa/doctorservice/repository/PrescriptionRepository.class
-com/virtusa/doctorservice/DoctorServiceApplication.class
-com/virtusa/doctorservice/entity/MedSchedule.class

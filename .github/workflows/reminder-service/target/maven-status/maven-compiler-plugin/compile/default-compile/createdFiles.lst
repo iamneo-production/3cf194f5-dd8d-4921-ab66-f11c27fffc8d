@@ -1,4 +1,0 @@
-com/virtusa/reminderservice/ReminderServiceApplication.class
-com/virtusa/reminderservice/feign/DoctorFeignClient.class
-com/virtusa/reminderservice/dto/MedSchedule.class
-com/virtusa/reminderservice/controller/ReminderController.class
