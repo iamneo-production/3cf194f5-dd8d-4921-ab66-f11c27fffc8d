@@ -28,12 +28,12 @@ public class NotificationController {
     NotificationRepository notificationRepository;
 
     @Autowired
-    ReminderFeignClient reminderClient;
+    ReminderFeignClient reminderFeignClient;
 
     @PostMapping("/notifications/{patientId}")
     public void notification(@PathVariable("patientId") int pid)
         {
-            List<MedSchedule> schedules=reminderClient.postingRemindersToNotification(pid);
+            List<MedSchedule> schedules=reminderFeignClient.postingRemindersToNotification(pid);
             if(schedules.size()>0){
                 for(MedSchedule m: schedules){
                     String stime=m.getScheduleTime();
