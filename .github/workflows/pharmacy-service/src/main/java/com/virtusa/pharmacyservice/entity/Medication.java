@@ -1,11 +1,14 @@
 package com.virtusa.pharmacyservice.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
 public class Medication {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 	 String name;
 	 String description;

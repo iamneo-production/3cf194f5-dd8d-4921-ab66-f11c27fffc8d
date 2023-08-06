@@ -15,19 +15,19 @@ public class Prescription {
 	
 	private String medication;
 	
-	private String notes;
+	private String scheduleTime;
 
 	public Prescription() {
 		super();
 	}
 
-	public Prescription(int prescriptionId, int doctorId, int patientId, String medication, String notes) {
+	public Prescription(int prescriptionId, int doctorId, int patientId, String medication, String scheduleTime) {
 		super();
 		this.prescriptionId = prescriptionId;
 		this.doctorId = doctorId;
 		this.patientId = patientId;
 		this.medication = medication;
-		this.notes = notes;
+		this.scheduleTime = scheduleTime;
 	}
 
 	public int getPrescriptionId() {
@@ -62,12 +62,12 @@ public class Prescription {
 		this.medication = medication;
 	}
 
-	public String getNotes() {
-		return notes;
+	public String getScheduleTime() {
+		return scheduleTime;
 	}
 
-	public void setNotes(String notes) {
-		this.notes = notes;
+	public void setScheduleTime(String scheduleTime) {
+		this.scheduleTime = scheduleTime;
 	}
 	
 	
