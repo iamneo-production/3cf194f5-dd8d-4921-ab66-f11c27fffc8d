@@ -1,6 +1,9 @@
 package com.virtusa.doctorservice.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.virtusa.doctorservice.entity.Prescription;
+import com.virtusa.doctorservice.entity.MedSchedule;
 import com.virtusa.doctorservice.repository.PrescriptionRepository;
 
 
@@ -22,6 +26,18 @@ public class DoctorServiceController {
     @PostMapping("/prescriptions")
     public void addedPrescription(@RequestBody Prescription p){
         prescriptionRepository.save(p);
+    }
+
+    @GetMapping("/scheduleDate/{patientId}")
+    public List<MedSchedule> gettingSchedule(@PathVariable("patientId") int pid){
+        List<MedSchedule> schedules=new ArrayList<>();
+        for(Prescription p:prescriptionRepository.findByPatientId(pid)){
+            MedSchedule m=new MedSchedule();
+            m.setMedicationName(p.getMedication());
+            m.setScheduleTime(p.getScheduleTime());
+            schedules.add(m);
+        }
+        return schedules;
     }
     
 }
