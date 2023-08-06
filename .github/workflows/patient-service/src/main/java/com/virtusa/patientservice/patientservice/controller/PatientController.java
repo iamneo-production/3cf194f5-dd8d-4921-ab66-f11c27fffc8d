@@ -8,26 +8,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-
+import com.virtusa.patientservice.entity.Patient;
+import com.virtusa.patientservice.repository.PatientRepo;
 
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
+
 	@Autowired
 	private PatientRepo patientRepository;
 
-    @PostMapping
-    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient){
-
-       Patient patient1 = patientService.savePatient(patient);
-
-       return ResponseEntity.status(HttpStatus.CREATED).body(patient1);
-
+    @PostMapping("/patients")
+    public String addPatient(@RequestBody Patient patient){
+        patientRepository.save(patient);
+        return "success" ;
     }
-
-
-
-
 
     
 }

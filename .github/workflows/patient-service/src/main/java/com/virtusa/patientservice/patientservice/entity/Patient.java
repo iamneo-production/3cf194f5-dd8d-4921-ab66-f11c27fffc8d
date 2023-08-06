@@ -16,6 +16,7 @@ public class Patient {
     private int age;
     private int prescriptionId;
     private String phoneno;
+    
     public int getPatientId() {
         return patientId;
     }
